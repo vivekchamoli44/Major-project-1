@@ -1,0 +1,27 @@
+{
+  "name": "major-project-1",
+  "version": "1.0.0",
+  "description": "This is my first major project with MERN stack i am going to build a website like air bnb having some different functionalities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivekchamoli44/Major-project-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vivekchamoli44/Major-project-1/issues"
+  },
+  "homepage": "https://github.com/vivekchamoli44/Major-project-1#readme",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.2.3"
+  }
+}
