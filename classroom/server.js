@@ -1,53 +1,42 @@
 const express=require("express");
 const app=express();
+const users=require("./routes/user");
+const posts=require("./routes/post");
+const session=require("express-session");
+const flash=require("connect-flash");
+const path=require("path");
+
+let sessionOptions={secret:"mysupersecretstring",resave:false,saveUninitialized:true};
+app.set("view engine",'ejs');
+app.set("views",path.join(__dirname,"views"));
 
 
-app.get("/",(req,res)=>{
-    res.send("Hi i am root");
-});
-//USERS
-//index
 
-app.get("/users",(req,res)=>{
-    res.send("Get all users");
-});
-//Show-user
-app.get("/users/:id",(req,res)=>{
-    res.send("Get for show user id ");
-});
-//post route
-app.post("/users",(req,res)=>{
-    res.send("post for users");
-});
-
-//delete route
-app.delete("/users/:id",(req,res)=>{
-    res.send("Delete for users");
+app.use(session(sessionOptions));
+app.use(flash());
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
 });
 
-//POSTS
-
-//index
-
-app.get("/",(req,res)=>{
-    res.send("Get all users");
-});
-//Show-user
-app.get("/users/:id",(req,res)=>{
-    res.send("Get for show user id ");
-});
-//post route
-app.post("/users",(req,res)=>{
-    res.send("post for users");
+app.get("/register",(req,res)=>{
+    let {name="anonymous"}=req.query;
+    req.session.name=name;
+    if(name=='anonymous'){
+        req.flash("error","Some error occured");
+    }
+    else{
+        req.flash("success","user registered");
+    }
+    res.redirect("/hello");
 });
 
-//delete route
-app.delete("/users/:id",(req,res)=>{
-    res.send("Delete for users");
+app.get("/hello",(req,res)=>{
+    res.render("page.ejs",{name:req.session.name});
 });
 
-
-
+//port
 app.listen(3000,()=>{
     console.log("Server is listening to port 3000");
 });
