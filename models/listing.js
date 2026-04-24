@@ -11,10 +11,9 @@ const listingSchema=new Schema({
         type:String,
     },
     image:{
-        type:String,
-        default:"https://image.pngaaa.com/13/1887013-middle.png",
-        set:(v)=>v===""?"https://image.pngaaa.com/13/1887013-middle.png":v,
-    },
+        url:String,
+        filename:String,
+     },
     price:{
         type:Number,
     },
@@ -33,6 +32,10 @@ const listingSchema=new Schema({
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User",   
+    },
+    category:{
+        type:String,
+        enum:["mountains","farms","amazing pools","rooms","iconic cities","camping","arctic","castles",""]
     }
 });
 
